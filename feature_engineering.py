@@ -47,3 +47,9 @@ df["message_length"] = df["message"].apply(len)
 print("\n=== message_length feature ===")
 print("Average length by label:")
 print(df.groupby("label")["message_length"].mean())
+# Feature 4: how many digits (numbers) are in the message?
+df["num_digits"] = df["message"].apply(lambda x: sum(char.isdigit() for char in x))
+
+print("\n=== num_digits feature ===")
+print("Average digits by label:")
+print(df.groupby("label")["num_digits"].mean())
