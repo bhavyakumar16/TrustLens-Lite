@@ -41,3 +41,9 @@ df["has_urgent_words"] = df["message"].apply(check_urgent_words)
 print("\n=== has_urgent_words feature ===")
 print("Total messages with urgent words:", df["has_urgent_words"].sum())
 print(df[df["has_urgent_words"] == 1][["message", "has_urgent_words"]].head(5))
+# Feature 3: how long is the message?
+df["message_length"] = df["message"].apply(len)
+
+print("\n=== message_length feature ===")
+print("Average length by label:")
+print(df.groupby("label")["message_length"].mean())
