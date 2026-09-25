@@ -26,3 +26,18 @@ df["has_url"] = df["message"].apply(lambda x: 1 if re.search(r"http|www|\.com|\.
 print("\n=== has_url feature ===")
 print("Total messages with a URL:", df["has_url"].sum())
 print(df[df["has_url"] == 1][["message", "has_url"]].head(5))
+# Feature 2: does the message contain urgency/scam-trigger words?
+urgent_words = ["urgent", "winner", "won", "free", "cash", "prize", "claim", "congratulations", "call now", "text now"]
+
+def check_urgent_words(message):
+    message_lower = message.lower()
+    for word in urgent_words:
+        if word in message_lower:
+            return 1
+    return 0
+
+df["has_urgent_words"] = df["message"].apply(check_urgent_words)
+
+print("\n=== has_urgent_words feature ===")
+print("Total messages with urgent words:", df["has_urgent_words"].sum())
+print(df[df["has_urgent_words"] == 1][["message", "has_urgent_words"]].head(5))
